@@ -1,0 +1,31 @@
+{
+  "name": "bookexchangeplatform",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD\r # Book Exchange Platform",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Waleed1Albawab/BookExchangePlatform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Waleed1Albawab/BookExchangePlatform/issues"
+  },
+  "homepage": "https://github.com/Waleed1Albawab/BookExchangePlatform#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}

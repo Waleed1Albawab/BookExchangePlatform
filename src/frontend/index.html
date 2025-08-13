@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Exchange Platform</title>
+  <!-- ربط ملف CSS الخارجي -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Book Exchange Platform</h1>
+
+  <!-- قسم التسجيل -->
+  <h2>Register</h2>
+  <form id="registerForm">
+    <!-- إدخال اسم المستخدم -->
+    <input type="text" id="regUsername" placeholder="Username" required>
+    <!-- إدخال البريد الإلكتروني -->
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <button type="submit">Register</button>
+  </form>
+  <!-- مكان عرض نتيجة التسجيل -->
+  <div id="registerResult"></div>
+
+  <!-- قسم تسجيل الدخول -->
+  <h2>Login</h2>
+  <form id="loginForm">
+    <!-- إدخال اسم المستخدم -->
+    <input type="text" id="loginUsername" placeholder="Username" required>
+    <button type="submit">Login</button>
+  </form>
+  <!-- مكان عرض نتيجة تسجيل الدخول -->
+  <div id="loginResult"></div>
+
+  <!-- جافا سكربت داخلي للتعامل مع الفورمات -->
+  <script>
+    // اختيار الفورمات وصناديق النتائج من DOM
+    const registerForm = document.getElementById('registerForm');
+    const registerResult = document.getElementById('registerResult');
+
+    // التعامل مع إرسال فورم التسجيل
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // منع إعادة تحميل الصفحة بشكل افتراضي
+
+      // أخذ القيم المدخلة
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+
+      // إرسال البيانات إلى السيرفر
+      const res = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email }) // تحويل البيانات إلى JSON
+      });
+
+      // انتظار الرد وعرضه في صندوق النتيجة
+      const data = await res.json();
+      registerResult.textContent = JSON.stringify(data);
+    });
+
+    // التعامل مع إرسال فورم تسجيل الدخول
+    const loginForm = document.getElementById('loginForm');
+    const loginResult = document.getElementById('loginResult');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // منع إعادة تحميل الصفحة
+
+      // أخذ قيمة اسم المستخدم
+      const username = document.getElementById('loginUsername').value;
+
+      // إرسال البيانات إلى السيرفر
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }) // تحويل البيانات إلى JSON
+      });
+
+      // انتظار الرد وعرضه في صندوق النتيجة
+      const data = await res.json();
+      loginResult.textContent = JSON.stringify(data);
+    });
+  </script>
+
+  <!-- ربط ملف JS خارجي -->
+  <script src="script.js"></script>
+
+</body>
+</html>

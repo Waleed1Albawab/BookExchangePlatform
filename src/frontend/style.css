@@ -1,0 +1,45 @@
+/* تنسيق عام لجسم الصفحة */
+body {
+    font-family: Arial, sans-serif; /* الخط المستخدم */
+    background-color: #f5f5f5;      /* لون خلفية الصفحة */
+    margin: 0;                       /* إزالة الهوامش الافتراضية */
+    padding: 0;                      /* إزالة الحشو الافتراضي */
+}
+
+/* تنسيق الحاوية الرئيسية للمحتوى */
+.container {
+    max-width: 500px;                      /* أقصى عرض */
+    margin: 50px auto;                     /* توسيط الحاوية أفقياً ورأسياً */
+    padding: 20px;                         /* الحشو الداخلي */
+    background-color: #fff;                /* لون الخلفية أبيض */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* إضافة ظل خفيف */
+    border-radius: 8px;                    /* حواف دائرية */
+}
+
+/* تنسيق جميع الحقول وأزرار الإرسال */
+input, button {
+    width: 100%;            /* عرض كامل */
+    padding: 10px;          /* حشو داخلي */
+    margin: 5px 0;          /* مسافة بين العناصر */
+    border-radius: 5px;     /* حواف دائرية */
+    border: 1px solid #ccc; /* إطار خفيف */
+}
+
+/* تنسيق الزر بشكل خاص */
+button {
+    background-color: #007BFF; /* لون الخلفية أزرق */
+    color: white;               /* لون النص أبيض */
+    border: none;               /* إزالة إطار الزر */
+    cursor: pointer;            /* تغير شكل المؤشر عند المرور على الزر */
+}
+
+/* تأثير عند تمرير الماوس على الزر */
+button:hover {
+    background-color: #0056b3; /* تغيير لون الزر عند المرور */
+}
+
+/* تنسيق صندوق الرسائل */
+.message {
+    margin-top: 10px;      /* مسافة فوق الصندوق */
+    font-weight: bold;      /* خط عريض للرسائل */
+}
