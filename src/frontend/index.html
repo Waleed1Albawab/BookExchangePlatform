@@ -31,6 +31,15 @@
   <!-- مكان عرض نتيجة تسجيل الدخول -->
   <div id="loginResult"></div>
 
+  <!-- قسم إضافة كتاب جديد -->
+  <h2>Add a New Book</h2>
+  <form id="addBookForm">
+    <input type="text" id="bookTitle" placeholder="Book Title" required>
+    <input type="text" id="bookAuthor" placeholder="Author" required>
+    <button type="submit">Add Book</button>
+  </form>
+  <div id="addBookResult"></div>
+
   <!-- جافا سكربت داخلي للتعامل مع الفورمات -->
   <script>
     // اختيار الفورمات وصناديق النتائج من DOM
@@ -39,44 +48,48 @@
 
     // التعامل مع إرسال فورم التسجيل
     registerForm.addEventListener('submit', async (e) => {
-      e.preventDefault(); // منع إعادة تحميل الصفحة بشكل افتراضي
-
-      // أخذ القيم المدخلة
+      e.preventDefault();
       const username = document.getElementById('regUsername').value;
       const email = document.getElementById('regEmail').value;
-
-      // إرسال البيانات إلى السيرفر
       const res = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email }) // تحويل البيانات إلى JSON
+        body: JSON.stringify({ username, email })
       });
-
-      // انتظار الرد وعرضه في صندوق النتيجة
       const data = await res.json();
       registerResult.textContent = JSON.stringify(data);
     });
 
-    // التعامل مع إرسال فورم تسجيل الدخول
     const loginForm = document.getElementById('loginForm');
     const loginResult = document.getElementById('loginResult');
 
     loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault(); // منع إعادة تحميل الصفحة
-
-      // أخذ قيمة اسم المستخدم
+      e.preventDefault();
       const username = document.getElementById('loginUsername').value;
-
-      // إرسال البيانات إلى السيرفر
       const res = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }) // تحويل البيانات إلى JSON
+        body: JSON.stringify({ username })
       });
-
-      // انتظار الرد وعرضه في صندوق النتيجة
       const data = await res.json();
       loginResult.textContent = JSON.stringify(data);
+    });
+
+    // التعامل مع إرسال فورم إضافة كتاب جديد
+    const addBookForm = document.getElementById('addBookForm');
+    const addBookResult = document.getElementById('addBookResult');
+
+    addBookForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('bookTitle').value;
+      const author = document.getElementById('bookAuthor').value;
+      const res = await fetch('http://localhost:3000/add-book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, author })
+      });
+      const data = await res.json();
+      addBookResult.textContent = JSON.stringify(data);
     });
   </script>
 

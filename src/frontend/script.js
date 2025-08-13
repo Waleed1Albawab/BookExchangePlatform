@@ -1,49 +1,55 @@
-// انتظار تحميل محتوى الصفحة بالكامل قبل تنفيذ أي كود
-document.addEventListener("DOMContentLoaded", () => {
-    // اختيار الفورمات وعرض الرسائل من الـ DOM
-    const registerForm = document.getElementById("registerForm"); // فورم التسجيل
-    const loginForm = document.getElementById("loginForm");       // فورم تسجيل الدخول
-    const messageBox = document.getElementById("message");        // صندوق الرسائل لعرض النتائج
+// التعامل مع فورم التسجيل
+const registerForm = document.getElementById('registerForm');
+const registerResult = document.getElementById('registerResult');
 
-    // التعامل مع إرسال فورم التسجيل
-    registerForm?.addEventListener("submit", async (e) => {
-        e.preventDefault(); // منع إعادة تحميل الصفحة بشكل افتراضي
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('regUsername').value;
+  const email = document.getElementById('regEmail').value;
 
-        // أخذ القيم المدخلة من المستخدم
-        const username = document.getElementById("regUsername").value;
-        const password = document.getElementById("regPassword").value;
+  const res = await fetch('http://localhost:3000/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email })
+  });
 
-        // إرسال البيانات إلى السيرفر باستخدام Fetch API
-        const res = await fetch("/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }) // تحويل البيانات إلى JSON
-        });
+  const data = await res.json();
+  registerResult.textContent = JSON.stringify(data);
+});
 
-        // انتظار الرد من السيرفر وتحويله إلى JSON
-        const data = await res.json();
-        // عرض رسالة السيرفر في صندوق الرسائل
-        messageBox.textContent = data.message;
-    });
+// التعامل مع فورم تسجيل الدخول
+const loginForm = document.getElementById('loginForm');
+const loginResult = document.getElementById('loginResult');
 
-    // التعامل مع إرسال فورم تسجيل الدخول
-    loginForm?.addEventListener("submit", async (e) => {
-        e.preventDefault(); // منع إعادة تحميل الصفحة بشكل افتراضي
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('loginUsername').value;
 
-        // أخذ القيم المدخلة من المستخدم
-        const username = document.getElementById("loginUsername").value;
-        const password = document.getElementById("loginPassword").value;
+  const res = await fetch('http://localhost:3000/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username })
+  });
 
-        // إرسال البيانات إلى السيرفر باستخدام Fetch API
-        const res = await fetch("/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }) // تحويل البيانات إلى JSON
-        });
+  const data = await res.json();
+  loginResult.textContent = JSON.stringify(data);
+});
 
-        // انتظار الرد من السيرفر وتحويله إلى JSON
-        const data = await res.json();
-        // عرض رسالة السيرفر في صندوق الرسائل
-        messageBox.textContent = data.message;
-    });
+// التعامل مع فورم إضافة كتاب جديد
+const addBookForm = document.getElementById('addBookForm');
+const addBookResult = document.getElementById('addBookResult');
+
+addBookForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const title = document.getElementById('bookTitle').value;
+  const author = document.getElementById('bookAuthor').value;
+
+  const res = await fetch('http://localhost:3000/addBook', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, author })
+  });
+
+  const data = await res.json();
+  addBookResult.textContent = JSON.stringify(data);
 });
